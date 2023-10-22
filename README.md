@@ -53,22 +53,3 @@ To run the automated tests, use the following command:
 
 ```bash
 mvn test
-
-## Contributing
-
-Contributions are welcome! If you want to contribute to this project, please follow these steps:
-
-Fork the project.
-Create a new branch for your feature or bug fix.
-Make your changes.
-Test your changes thoroughly.
-Commit your changes and create a pull request.
-Please make sure your pull request includes a clear description of the changes you've made and why they are necessary.
-
-## Contact
-If you have any questions or want to get in touch, please feel free to contact the project owner:
-GitHub: haloindra
-
-Happy testing!
-
-
