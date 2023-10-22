@@ -17,10 +17,10 @@
 This project is a demonstration of using Cucumber and Selenium to automate testing of web applications. It provides a structured and behavior-driven development (BDD) approach to testing, making it easy to write and maintain test cases.
 
 ## Report 
-![Login]([URL](https://github.com/haloindra/demoCucumberSelenium/blob/main/login))
-![Product]([URL](https://github.com/haloindra/demoCucumberSelenium/blob/main/product))
-![Cart]([URL](https://github.com/haloindra/demoCucumberSelenium/blob/main/cart.png))
-![Checkout]([URL](https://github.com/haloindra/demoCucumberSelenium/blob/main/checkout.png))
+![Login](https://github.com/haloindra/demoCucumberSelenium/blob/main/login.png)
+![Product](https://github.com/haloindra/demoCucumberSelenium/blob/main/product.png)
+![Cart](https://github.com/haloindra/demoCucumberSelenium/blob/main/cart.png)
+![Checkout](https://github.com/haloindra/demoCucumberSelenium/blob/main/checkout.png)
 
 ## Getting Started
 
