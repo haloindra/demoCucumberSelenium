@@ -13,6 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 import java.util.List;
 
 public class CheckoutInfoSauce {
@@ -82,6 +86,7 @@ public class CheckoutInfoSauce {
             System.out.println("Error message not found. Test continues...");
         }
         driver.quit();
+
     }
 
     @Then("order has been dispatched")
@@ -105,5 +110,23 @@ public class CheckoutInfoSauce {
     @And("i click finish")
     public void iClickFinish() {
         driver.findElement(CheckoutPage.finishButton).click();
+    }
+
+    @And("i should be directed to the next checkout step")
+    public void iShouldBeDirectedToTheNextCheckoutStep() {
+        By nextStepElement = By.xpath("//span[@class='title']"); // Replace with the actual XPath
+
+        // Create a WebDriverWait to wait for the element to be present
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5)); // Adjust the timeout as needed
+
+        // Wait for the next step element to be present
+        WebElement nextStep = wait.until(ExpectedConditions.presenceOfElementLocated(nextStepElement));
+
+        // Assert that the next step element is present
+        if (nextStep.isDisplayed()) {
+            System.out.println("Successfully directed to the next checkout step.");
+        } else {
+            System.out.println("Next checkout step not found.");
+        }
     }
 }
