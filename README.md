@@ -19,7 +19,7 @@ This project is a demonstration of using Cucumber and Selenium to automate testi
 ## Report 
 <img src="https://github.com/haloindra/demoCucumberSelenium/raw/main/screenshoot/login.png" alt="Login" width="640">
 <img src="https://github.com/haloindra/demoCucumberSelenium/raw/main/screenshoot/product.png" alt="Product" width="640">
-<img src="https://github.com/haloindra/demoCucumberSelenium/raw/main/screenshoot/cart.png" alt="Cart" width="300">
+<img src="https://github.com/haloindra/demoCucumberSelenium/raw/main/screenshoot/cart.png" alt="Cart" width="640">
 <img src="https://github.com/haloindra/demoCucumberSelenium/raw/main/screenshoot/checkout.png" alt="Checkout" width="640">
 
 ## Getting Started
