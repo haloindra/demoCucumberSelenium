@@ -1,5 +1,7 @@
 package StepDef;
 
+import ObjectRepository.CartPage;
+import ObjectRepository.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,7 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class CartSauce {
-     WebDriver driver;
+    WebDriver driver;
 
     @Given("the user is on the Cart page")
     public void theUserIsOnTheCartPage() {
@@ -21,83 +23,67 @@ public class CartSauce {
         driver = new ChromeDriver(opt);
         driver.get("https://www.saucedemo.com");
 
-
         // Log in
-        driver.findElement(By.name("user-name")).sendKeys("standard_user");
-        driver.findElement(By.name("password")).sendKeys("secret_sauce");
-        driver.findElement(By.id("login-button")).sendKeys(Keys.ENTER);
-
-        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
+        driver.findElement(LoginPage.usernameField).sendKeys("standard_user");
+        driver.findElement(LoginPage.passwordField).sendKeys("secret_sauce");
+        driver.findElement(LoginPage.loginButton).sendKeys(Keys.ENTER);
+        driver.findElement(CartPage.cartLink).click();
     }
 
     @When("the user adds an item to the cart")
     public void theUserAddsAnItemToTheCart() {
-        driver.findElement(By.xpath("//button[@id='continue-shopping']")).click();
+        driver.findElement(CartPage.continueShoppingButton).click();
         driver.findElement(By.xpath("//div[normalize-space()='Sauce Labs Backpack']")).click();
-        String desc = driver.findElement(By.cssSelector(".inventory_details_desc.large_size")).getText();
+        String desc = driver.findElement(CartPage.itemDescription).getText();
         Assert.assertEquals(desc, "carry.allTheThings() with the sleek, streamlined Sly Pack that " +
                 "melds uncompromising style with unequaled laptop and tablet protection.");
-        driver.findElement(By.name("add-to-cart-sauce-labs-backpack")).click();
-
-        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
-
-        driver.findElement(By.xpath("(//div[@class='cart_item'])[1]"));
-
+        driver.findElement(CartPage.addToCartButtonBackpack).click();
+        driver.findElement(CartPage.cartLink).click();
+        driver.findElement(CartPage.cartItem1);
     }
 
     @And("the user adds another item to the cart")
     public void theUserAddsAnotherItemToTheCart() {
-        driver.findElement(By.xpath("//button[@id='continue-shopping']")).click();
-
+        driver.findElement(CartPage.continueShoppingButton).click();
         driver.findElement(By.xpath("//div[normalize-space()='Sauce Labs Bike Light']")).click();
-
-        driver.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-bike-light']")).click();
+        driver.findElement(CartPage.addToCartButtonBikeLight).click();
     }
 
     @Then("the cart should display the added items")
     public void theCartShouldDisplayTheAddedItems() {
-        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
-
-        driver.findElement(By.xpath("(//div[@class='cart_item'])[2]"));
+        driver.findElement(CartPage.cartLink).click();
+        driver.findElement(CartPage.cartItem2);
     }
 
     @And("the cart total should be updated accordingly")
     public void theCartTotalShouldBeUpdatedAccordingly() {
-        driver.findElement(By.xpath("//div[@class='cart_list']"));
+        driver.findElement(CartPage.cartList);
         driver.quit();
     }
 
     @When("the user attempts to remove an item from the empty cart")
     public void theUserAttemptsToRemoveAnItemFromTheEmptyCart() {
-        driver.findElement(By.xpath("//a[@class='shopping_cart_link']")).click();
-
-        driver.findElement(By.xpath("//button[@id='remove-sauce-labs-backpack']")).click();
-
-        driver.findElement(By.xpath("//button[@id='remove-sauce-labs-bike-light']")).click();
+        driver.findElement(CartPage.cartLink).click();
+        driver.findElement(CartPage.removeButtonBackpack).click();
+        driver.findElement(CartPage.removeButtonBikeLight).click();
     }
 
     @When("the user clicks on the Proceed to Checkout button")
     public void theUserClicksOnTheProceedToCheckoutButton() {
-        driver.findElement(By.xpath("//button[@id='checkout']")).click();
+        driver.findElement(CartPage.proceedToCheckoutButton).click();
     }
 
     @Then("the cart should indicating it's empty")
     public void theCartShouldIndicatingItSEmpty() {
         try {
-            WebElement list = driver.findElement(By.xpath("//div[@class='cart_item']"));
-            // If the element is found, check its visibility
+            WebElement list = driver.findElement(CartPage.cartItem1);
             boolean displayStatus = list.isDisplayed();
-
             if (displayStatus) {
-                // The element is visible, which means it's not empty, so you can fail the test if needed
                 System.out.println("The cart is not empty.");
-                // Assert.fail("The cart should indicate it's empty");
             } else {
-                // The element is found but not visible, which could mean it's empty
                 System.out.println("The cart may be empty.");
             }
         } catch (NoSuchElementException e) {
-            // The element is not found, which is the expected behavior for an empty cart
             System.out.println("The cart is empty.");
         }
     }

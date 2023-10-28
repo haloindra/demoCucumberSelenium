@@ -1,17 +1,16 @@
 package StepDef;
 
+import ObjectRepository.LoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
 
 public class LoginSauce {
     WebDriver driver;
@@ -26,18 +25,17 @@ public class LoginSauce {
 
     @When("I enter username into the field username")
     public void iEnterUsernameIntoTheFieldUsername() {
-        driver.findElement(By.name("user-name")).sendKeys("standard_user");
+        driver.findElement(LoginPage.usernameField).sendKeys("standard_user");
     }
 
     @And("I enter password into the field password")
     public void iEnterPasswordIntoTheFieldPassword() {
-        driver.findElement(By.name("password")).sendKeys("secret_sauce");
+        driver.findElement(LoginPage.passwordField).sendKeys("secret_sauce");
     }
-
 
     @And("I Click button Login")
     public void iClickButtonLogin() {
-        driver.findElement(By.xpath("//input[@id='login-button']")).sendKeys(Keys.ENTER);
+        driver.findElement(LoginPage.loginButton).sendKeys(Keys.ENTER);
     }
 
     @Then("I successfully login")
@@ -47,10 +45,9 @@ public class LoginSauce {
         driver.quit();
     }
 
-
     @And("I enter invalid password into the field password")
     public void iEnterInvalidPasswordIntoTheFieldPassword() {
-        driver.findElement(By.name("password")).sendKeys("sauce_secret");
+        driver.findElement(LoginPage.passwordField).sendKeys("sauce_secret");
     }
 
     @And("the user should not be logged in")
@@ -60,12 +57,12 @@ public class LoginSauce {
 
     @Then("an error message should be displayed")
     public void anErrorMessageShouldBeDisplayed() {
-        driver.findElement(By.cssSelector("h3[data-test='error']"));
+        driver.findElement(LoginPage.errorText);
         driver.quit();
     }
 
     @When("I enter invalid username into the field username")
     public void iEnterInvalidUsernameIntoTheFieldUsername() {
-        driver.findElement(By.name("user-name")).sendKeys("user-standard");
+        driver.findElement(LoginPage.usernameField).sendKeys("user-standard");
     }
 }
